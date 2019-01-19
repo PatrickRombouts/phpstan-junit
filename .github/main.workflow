@@ -4,7 +4,7 @@ workflow "Testing" {
 }
 
 action "dependency" {
-  uses = "docker://composer/composer"
+  uses = "docker://composer"
   args = "install"
 }
 
