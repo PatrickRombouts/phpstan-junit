@@ -20,5 +20,5 @@ action "phpunit" {
 action "phpstan" {
   uses = "docker://php"
   needs = ["dependency"]
-  args = "vendor/bin/phpstan"
+  args = "vendor/bin/phpstan analyse --level=7 ./"
 }
