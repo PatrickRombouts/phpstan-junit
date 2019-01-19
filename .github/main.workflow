@@ -1,8 +1,8 @@
 workflow "Testing" {
   on = "push"
   resolves = [
-    "test",
-    "docker://php",
+    "phpstan",
+    "phpunit",
   ]
 }
 
@@ -11,13 +11,13 @@ action "dependency" {
   args = "install"
 }
 
-action "test" {
+action "phpunit" {
   uses = "docker://php"
   needs = ["dependency"]
   args = "vendor/bin/phpunit"
 }
 
-action "docker://php" {
+action "phpstan" {
   uses = "docker://php"
   needs = ["dependency"]
   args = "vendor/bin/phpstan"
