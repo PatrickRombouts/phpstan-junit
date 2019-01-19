@@ -1,6 +1,9 @@
 workflow "Testing" {
   on = "push"
-  resolves = ["test"]
+  resolves = [
+    "test",
+    "docker://php",
+  ]
 }
 
 action "dependency" {
@@ -9,7 +12,13 @@ action "dependency" {
 }
 
 action "test" {
-  uses = "docker://php:7.2"
+  uses = "docker://php"
   needs = ["dependency"]
-  args = "bin/phpunit"
+  args = "vendor/bin/phpunit"
+}
+
+action "docker://php" {
+  uses = "docker://php"
+  needs = ["dependency"]
+  args = "vendor/bin/phpstan"
 }
